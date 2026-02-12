@@ -411,3 +411,416 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Very Important Question 💍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 6s infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: #e91e63;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .question {
+            font-size: 1.5em;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+
+        .name {
+            color: #e91e63;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        #noBtn {
+            background: #e0e0e0;
+            color: #666;
+            position: relative;
+        }
+
+        #noBtn:hover {
+            background: #d0d0d0;
+        }
+
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .celebration.active {
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration h2 {
+            font-size: 4em;
+            color: #e91e63;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .celebration p {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .gif-container {
+            margin: 30px 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-container {
+            margin: 30px 0;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .intro-video-container {
+            margin: 0 0 20px 0;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro-video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="intro-video-container">
+            <video id="introVideo" autoplay muted loop playsinline>
+                <source src="Sumi.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="emoji">💍</div>
+        <h1>Valentine's Day 2026</h1>
+        <div class="question">
+            Hey <span class="name">Sumiyaaaaaaaa</span>,<br>
+            Will you marry me Jaaaaaaaaaaanu? 💕
+        </div>
+        <div class="buttons">
+            <button id="yesBtn">Yes! 💖</button>
+            <button id="noBtn">Ni</button>
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <h2>🎉 YES!!! 🎉</h2>
+        <div class="video-container">
+            <video id="celebrationVideo" controls autoplay>
+                <source src="proposal-video.mp4" type="video/mp4">
+                <!-- Replace the above URL with your own romantic video URL -->
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <p>I knew you'd say yes! ❤️</p>
+        <p style="margin-top: 20px; font-size: 1.2em;">I love you, Baby! 💕</p>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const celebration = document.getElementById('celebration');
+        const container = document.querySelector('.container');
+
+        // Funny responses for "No" button
+        const noTexts = [
+            "Paki baat hai? 🥺",
+            "Jaaaaaaaanu kion? 😢",
+            "Think again! 💭",
+            "Acha Marzi hai Jaanu! 😢",
+            "Wrong button! 👆",
+            "Try the other one! 👉",
+            "The YES button is prettier! 💝",
+            "I'll wait... ⏰",
+            "Please? 🙏",
+            "Pretty please? 🥺",
+            "With a cherry on top? 🍒",
+            "I know you want to say yes! 😏",
+            "Come on! 💪",
+            "You know you want to! 😉",
+            "Jaaaaaaaaaaaanu Bas! 😄"
+        ];
+
+        let noClickCount = 0;
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Generate hearts continuously
+        setInterval(createHeart, 300);
+
+        // Yes button - Show celebration
+        yesBtn.addEventListener('click', () => {
+            celebration.classList.add('active');
+            
+            // Play the video
+            const video = document.getElementById('celebrationVideo');
+            video.play();
+            
+            // Create confetti effect
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                }, i * 30);
+            }
+        });
+
+        // No button - Funny interactions
+        noBtn.addEventListener('click', (e) => {
+            noClickCount++;
+            
+            // Change button text with funny messages
+            if (noClickCount < noTexts.length) {
+                noBtn.textContent = noTexts[noClickCount];
+            }
+
+            // Make No button smaller and Yes button bigger
+            noBtn.style.transform = `scale(${1 - (noClickCount * 0.1)})`;
+            yesBtn.style.transform = `scale(${1 + (noClickCount * 0.1)})`;
+
+            // After 5 clicks, make the No button run away
+            if (noClickCount >= 5) {
+                const containerRect = container.getBoundingClientRect();
+                const maxX = window.innerWidth - noBtn.offsetWidth - 100;
+                const maxY = window.innerHeight - noBtn.offsetHeight - 100;
+                
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = Math.random() * maxX + 50 + 'px';
+                noBtn.style.top = Math.random() * maxY + 50 + 'px';
+            }
+
+            // After 10 clicks, hide the No button
+            if (noClickCount >= 10) {
+                noBtn.style.display = 'none';
+                yesBtn.textContent = 'You have no choice! Click YES! 😘';
+            }
+        });
+
+        // Hover effect for No button (makes it move away)
+        noBtn.addEventListener('mouseenter', () => {
+            if (noClickCount >= 3) {
+                const maxX = window.innerWidth - noBtn.offsetWidth - 100;
+                const maxY = window.innerHeight - noBtn.offsetHeight - 100;
+                
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = Math.random() * maxX + 50 + 'px';
+                noBtn.style.top = Math.random() * maxY + 50 + 'px';
+            }
+        });
+
+        // Confetti function
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = ['#e91e63', '#f093fb', '#f5576c', '#667eea', '#764ba2'][Math.floor(Math.random() * 5)];
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-10px';
+            confetti.style.borderRadius = '50%';
+            confetti.style.zIndex = '1000';
+            confetti.style.animation = 'confettiFall ' + (Math.random() * 3 + 2) + 's linear';
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+
+        // Add confetti animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes confettiFall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
