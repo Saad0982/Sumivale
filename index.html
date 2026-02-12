@@ -221,12 +221,33 @@
             font-size: 3em;
             margin: 20px 0;
         }
+
+        .intro-video-container {
+            margin: 0 0 20px 0;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro-video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="hearts" id="hearts"></div>
     
     <div class="container">
+        <div class="intro-video-container">
+            <video id="introVideo" autoplay muted loop playsinline>
+                <source src="Sumi.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="emoji">💍</div>
         <h1>Valentine's Day 2026</h1>
         <div class="question">
